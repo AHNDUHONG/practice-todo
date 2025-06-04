@@ -1,5 +1,6 @@
 import Boards from './components/Boards';
 import Controller from './components/Controller';
+import { BoardProvider } from './context/BoardContext';
 
 const MOCK_DATA = [
   {
@@ -51,22 +52,24 @@ const MOCK_DATA = [
 
 function App() {
   return (
-    <div className="flex flex-col h-screen">
-      <header className="w-full h-[80px] bg-slate-800 flex flex-col items-center justify-center text-stone-100">
-        <p className="text-lg font-semibold">Kanban Board Project</p>
-      </header>
-      <main className="flex-1 flex flex-col justify-between">
-        <div className="grid grid-cols-3 gap-4 p-4 w-full">
-          <Boards type={'todo'} data={MOCK_DATA} />
-          <Boards type={'inprogress'} data={MOCK_DATA} />
-          <Boards type={'done'} data={MOCK_DATA} />
-        </div>
-        <Controller />
-      </main>
-      <footer className="w-full h-[60px] bg-slate-800 flex items-center text-stone-100 justify-center">
-        <p>&copy; Dev-KMS</p>
-      </footer>
-    </div>
+    <BoardProvider initialData={MOCK_DATA}>
+      <div className="flex flex-col h-screen">
+        <header className="w-full h-[80px] bg-slate-800 flex flex-col items-center justify-center text-stone-100">
+          <p className="text-lg font-semibold">Kanban Board Project</p>
+        </header>
+        <main className="flex-1 flex flex-col justify-between">
+          <div className="grid grid-cols-3 gap-4 p-4 w-full">
+            <Boards type={'todo'} data={MOCK_DATA} />
+            <Boards type={'inprogress'} data={MOCK_DATA} />
+            <Boards type={'done'} data={MOCK_DATA} />
+          </div>
+          <Controller />
+        </main>
+        <footer className="w-full h-[60px] bg-slate-800 flex items-center text-stone-100 justify-center">
+          <p>&copy; Dev-KMS</p>
+        </footer>
+      </div>
+    </BoardProvider>
   );
 }
 
